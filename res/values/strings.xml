@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, ExampleActivity!</string>
+    <string name="app_name">FragmentExampleProject</string>
+
+    <string-array name="list_entries">
+    	<item>This is Item One</item>
+    	<item>This is Item Two</item>
+    	<item>This is Item Three!</item>
+    </string-array>
+    <string-array name="content_values">
+    	<item>Laborum commodo shoreditch american apparel, put a bird on it Austin nostrud eiusmod readymade id aesthetic synth. Photo booth quis pariatur butcher delectus sustainable. Banksy keffiyeh cliche, PBR deserunt carles DIY dreamcatcher mixtape aesthetic locavore. Delectus leggings laborum biodiesel +1 dolore. Beard est brunch, viral sartorial twee DIY. Biodiesel beard artisan shoreditch ut sunt american apparel butcher odio, ea terry richardson. American apparel deserunt ullamco synth ethical sed, portland non tumblr brunch photo booth.</item>
+    	<item>Skateboard next level food truck, whatever carles quis ut mcsweeney\'s photo booth high life. Do thundercats mustache lo-fi readymade, skateboard gluten-free laborum before they sold out cosby sweater vinyl 3 wolf moon. DIY food truck shoreditch, consequat tempor scenester minim officia next level yr sunt fixie enim. 8-bit aliquip mustache occaecat etsy, scenester helvetica jean shorts before they sold out nihil squid american apparel farm-to-table raw denim retro. Nihil high life cardigan lomo single-origin coffee commodo, before they sold out farm-to-table et officia synth exercitation put a bird on it do. Fap lo-fi labore, keffiyeh etsy nostrud skateboard tofu fanny pack. Chambray raw denim pitchfork hoodie four loko.</item>
+    	<item>Non dolore aliqua, organic sint mustache sunt art party nostrud magna vice keytar 3 wolf moon photo booth. Adipisicing keffiyeh beard american apparel. Etsy lomo aliquip, non delectus messenger bag carles viral. Eu enim DIY, incididunt aesthetic keffiyeh pariatur fixie before they sold out. American apparel squid wayfarers, craft beer gluten-free iphone est. Butcher tofu retro ex, nostrud master cleanse non blog sint. Ex reprehenderit vice, odio labore proident nostrud locavore dreamcatcher etsy.</item>
+    </string-array>
+</resources>
