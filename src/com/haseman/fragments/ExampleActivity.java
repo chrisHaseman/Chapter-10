@@ -7,13 +7,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
-
-public class ExampleActivity extends FragmentActivity {
+import android.os.Build;
+import android.widget.Toast;
+import android.util.Log;
+public class ExampleActivity extends Activity {
     
 	FragmentManager manager;
 	
@@ -22,8 +24,9 @@ public class ExampleActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        manager = getSupportFragmentManager();
+        manager = getFragmentManager();
         setTitle("Fragment Example");
+        buildActionBar();
     }
     @Override
     public void onResume(){
@@ -32,7 +35,7 @@ public class ExampleActivity extends FragmentActivity {
     	if(findViewById(R.id.content_fragment) == null){
     		registerReceiver(true);
     		FragmentTransaction ft = manager.beginTransaction();
-			ft.add(R.id.list_fragment, new DemoListFragment());
+			ft.add(R.id.root, new DemoListFragment());
 			ft.commit();
     	}
     }
@@ -64,15 +67,17 @@ public class ExampleActivity extends FragmentActivity {
     		super.onBackPressed();
     }
     
-    public boolean onContextItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item){
     	int id = item.getItemId();
     	
+        Log.d("FARAG", "OPtions selected: "+id);
     	if(id == android.R.id.home){
     		//We're already home, so don't do anything here
     		return true;
     	}
     	else{
-    		//Perform the delete action here
+            Toast t = Toast.makeText(this, "Delete something", Toast.LENGTH_LONG);
+            t.show();
     		return true;
     	}
     }
@@ -81,18 +86,38 @@ public class ExampleActivity extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu){
     	MenuItem item = menu.add("delete");
     	item.setIcon(android.R.drawable.ic_delete);
-//    	if(Build.VERSION.SDK_INT >= 11){
-//    		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-//    	}
+    	if(Build.VERSION.SDK_INT >= 11){
+    		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+    	}
     	return true;
     }
-//    private void buildActionBar(){
-//    	ActionBar bar = getActionBar();
-//    	ActionBar.Tab tab1 = bar.newTab();
-//    	tab1.setTabListener(new ExampleTabListener());
-//    	bar.addTab(tab1);
-//    }
+    private void buildActionBar(){
+    	ActionBar bar = getActionBar();
+        bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        
+    	ActionBar.Tab tab1 = bar.newTab();
+        tab1.setText("Tab Text");
+    	tab1.setTabListener(new ExampleTabListener());
+    	bar.addTab(tab1);
+    }
     
+    class ExampleTabListener implements ActionBar.TabListener {
+        @Override
+        public void onTabReselected(Tab tab, FragmentTransaction ft) {
+            Toast t = Toast.makeText(ExampleActivity.this, "Tab reselected", Toast.LENGTH_LONG);
+            t.show();
+        }
+        @Override
+        public void onTabSelected(Tab tab, FragmentTransaction ft) {
+            Toast t = Toast.makeText(ExampleActivity.this, "Tab selected", Toast.LENGTH_LONG);
+            t.show();
+        }
+        @Override
+        public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+            Toast t = Toast.makeText(ExampleActivity.this, "Tab unselected", Toast.LENGTH_LONG);
+            t.show();
+        }
+    }
     BroadcastReceiver intentReceiver = new BroadcastReceiver() {
 		
 		@Override
@@ -101,7 +126,7 @@ public class ExampleActivity extends FragmentActivity {
 			
 			FragmentTransaction ft = manager.beginTransaction();
 			//ft.remove(manager.findFragmentByTag("list fragment"));
-			ft.replace(R.id.list_fragment, new ContentFragment(intent.getStringExtra("text")));
+			ft.replace(R.id.root, new ContentFragment(intent.getStringExtra("text")));
 			ft.addToBackStack("contentFragment");
 			ft.commit();
 			registerReceiver(false);
